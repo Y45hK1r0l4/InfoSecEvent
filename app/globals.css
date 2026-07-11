@@ -158,7 +158,7 @@
       @apply flex flex-row items-center gap-2;
 
       p {
-        @apply text-xl font-bold italic max-sm:hidden;
+        @apply text-xl font-bold max-sm:hidden;
       }
     }
 
@@ -175,7 +175,7 @@
     @apply flex flex-col gap-3;
 
     .poster {
-      @apply h-75 w-full rounded-lg object-cover;
+      @apply h-auto w-full rounded-lg object-cover;
     }
 
     .title {
