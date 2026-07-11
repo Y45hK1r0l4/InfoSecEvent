@@ -1,6 +1,6 @@
 ## Introduction
 
-DevEvent is a modern event management web application built with Next.js to manage and showcase events seamlessly. It features a dynamic home page displaying upcoming events, robust API routes for CRUD operations, Cloudinary-powered image uploads, detailed event pages with registration and similar event suggestions, and integrated analytics to track user engagement and optimize performance.
+InfoSecEvent is a modern event management web application built with Next.js to manage and showcase events seamlessly. It features a dynamic home page displaying upcoming events, robust API routes for CRUD operations, Cloudinary-powered image uploads, detailed event pages with registration and similar event suggestions, and integrated analytics to track user engagement and optimize performance.
 
 ## Tech Stack
 
@@ -43,13 +43,13 @@ And many more, including code architecture and reusability.
 ### Clone the repository
 
 ```bash
-git clone https://github.com/Y45hK1r0l4/DevEvent.git
+git clone https://github.com/Y45hK1r0l4/InfoSecEvent.git
 ```
 
 ### Navigate to the project
 
 ```bash
-cd DevEvent
+cd InfoSecEvent
 ```
 
 ### Install dependencies
