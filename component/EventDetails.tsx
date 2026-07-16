@@ -6,6 +6,7 @@ import Image from "next/image";
 import BookEvent from './BookEvent';
 import EventCard from './EventCard';
 import {cacheLife} from "next/cache";
+import { getBookingCount } from '@/lib/actions/booking.actions';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -37,7 +38,7 @@ const EventTags = ({ tags }: { tags: string[] }) => (
 
 const EventDetails = async ({ params }: { params: Promise<string> }) => {
     'use cache'
-    cacheLife('hours');
+    cacheLife('minutes');
     const slug = await params;
 
     let event;
@@ -68,7 +69,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
 
     if(!description) return notFound();
 
-    const bookings = 10;
+    const bookings = await getBookingCount(String(event._id));
 
     const similarEvents: IEvent[] = await getSimilarEventsBySlug(slug);
 
@@ -115,7 +116,7 @@ const EventDetails = async ({ params }: { params: Promise<string> }) => {
                         <h2>Book Your Spot</h2>
                         {bookings > 0 ? (
                             <p className="text-sm">
-                                Join {bookings} people who have already booked their spot!
+                                {bookings} people who have already booked their spot!
                             </p>
                         ): (
                             <p className="text-sm">Be the first to book your spot!</p>
