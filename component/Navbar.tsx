@@ -1,7 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getCurrentUser } from "@/lib/getCurrentUser";
+import { connection } from "next/server";
+import LogoutButton from "./LogoutButton";
 
-const Navbar = () => {
+const Navbar = async () => {
+
+    const user = await getCurrentUser();
+
   return (
     <header>
         <nav>
@@ -13,9 +19,24 @@ const Navbar = () => {
 
             <ul>
                 <Link href='/'>Home</Link>
-                <Link href='/'>Events</Link>
                 <Link href='/create-event'>Create Event</Link>
+
+                {!user ? (
+                    <>
+                        <Link href="/login">Login</Link>
+                        <Link href="/signup">Signup</Link>
+                    </>
+                ) : (
+                    <>
+                        <Link href="/profile">
+                            {user.name}
+                        </Link>
+                        <LogoutButton />
+                    </>
+                )}
             </ul>
+
+            
         </nav>
     </header>
   )

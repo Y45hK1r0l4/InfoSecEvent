@@ -3,6 +3,7 @@ import { Schibsted_Grotesk, Martian_Mono } from "next/font/google";
 import "./globals.css";
 import LightRays from "@/component/LightRays";
 import Navbar from "@/component/Navbar";
+import { Suspense } from "react";
 
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-schibsted_grotesk",
@@ -31,7 +32,9 @@ export default function RootLayout({
     >
 
       <body className="min-h-full flex flex-col">
-        <Navbar />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Navbar />
+        </Suspense>
         
         <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
           <LightRays
@@ -39,7 +42,7 @@ export default function RootLayout({
             raysColor="#5dfeca"
             raysSpeed={0.5}
             lightSpread={100}
-            rayLength={1.5}
+            rayLength={200}
             followMouse={true}
             mouseInfluence={0.02}
             noiseAmount={0}

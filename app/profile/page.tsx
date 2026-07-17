@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import ProtectedContent from "./ProtectedContent"
 
-const CreateEventPage = async () => {
+const Profile = async () => {
 
     return (
         <main className="wrapper py-10">
-            <h1 className="ml-76">Create Event</h1>
+            <h1 className="ml-76">Profile</h1>
 
             <Suspense fallback={<div>Loading...</div>}>
                 <ProtectedContent />
@@ -14,4 +14,4 @@ const CreateEventPage = async () => {
     );
 };
 
-export default CreateEventPage;
+export default Profile;

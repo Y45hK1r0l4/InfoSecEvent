@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function CreateEventForm() {
+  
   const router = useRouter();
 
   const [title, setTitle] = useState("");
