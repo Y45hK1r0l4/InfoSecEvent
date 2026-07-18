@@ -3,29 +3,52 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function CreateEventForm() {
-  
+type EventFormProps = {
+  mode: "create" | "edit";
+  initialData?: {
+    title: string;
+    date: string;
+    time: string;
+    location: string;
+    venue: string;
+    mode: string;
+    description: string;
+    overview: string;
+    audience: string;
+    organizer: string;
+    tags: string[];
+    agenda: string[];
+    image: string;
+    slug: string;
+  };
+};
+
+export default function EventForm({ mode, initialData }: EventFormProps) {
   const router = useRouter();
 
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [location, setLocation] = useState("");
-  const [venue, setVenue] = useState("");
-  const [mode, setMode] = useState("");
-  const [description, setDescription] = useState("");
-  const [overview, setOverview] = useState("");
-  const [audience, setAudience] = useState("");
-  const [organizer, setOrganizer] = useState("");
-  const [tags, setTags] = useState("");
-  const [agenda, setAgenda] = useState("");
+  const [title, setTitle] = useState(initialData?.title ?? "");
+  const [date, setDate] = useState(initialData?.date ?? "");
+  const [time, setTime] = useState(initialData?.time ?? "");
+  const [location, setLocation] = useState(initialData?.location ?? "");
+  const [venue, setVenue] = useState(initialData?.venue ?? "");
+  const [eventMode, setEventMode] = useState(initialData?.mode ?? "");
+  const [description, setDescription] = useState(
+    initialData?.description ?? "",
+  );
+  const [overview, setOverview] = useState(initialData?.overview ?? "");
+  const [audience, setAudience] = useState(initialData?.audience ?? "");
+  const [organizer, setOrganizer] = useState(initialData?.organizer ?? "");
+
+  const [tags, setTags] = useState(initialData?.tags.join(", ") ?? "");
+
+  const [agenda, setAgenda] = useState(initialData?.agenda.join(", ") ?? "");
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!image) {
+    if (mode === "create" && !image) {
       alert("Please upload an event image.");
       return;
     }
@@ -40,17 +63,24 @@ export default function CreateEventForm() {
       formData.append("time", time);
       formData.append("location", location);
       formData.append("venue", venue);
-      formData.append("mode", mode);
+      formData.append("mode", eventMode);
       formData.append("description", description);
       formData.append("overview", overview);
       formData.append("audience", audience);
       formData.append("organizer", organizer);
       formData.append("tags", tags);
       formData.append("agenda", agenda);
-      formData.append("image", image);
+      if (image) {
+        formData.append("image", image);
+      }
 
-      const response = await fetch("/api/events", {
-        method: "POST",
+      const url =
+        mode === "create" ? "/api/events" : `/api/events/${initialData!.slug}`;
+
+      const method = mode === "create" ? "POST" : "PATCH";
+
+      const response = await fetch(url, {
+        method,
         body: formData,
       });
 
@@ -63,21 +93,6 @@ export default function CreateEventForm() {
         throw new Error(data.message || "Failed to create event");
       }
       router.push(`/events/${data.event.slug}`);
-
-      // Clear form
-      setTitle("");
-      setDate("");
-      setTime("");
-      setLocation("");
-      setVenue("");
-      setMode("");
-      setDescription("");
-      setOverview("");
-      setAudience("");
-      setOrganizer("");
-      setTags("");
-      setAgenda("");
-      setImage(null);
     } catch (error) {
       console.error(error);
       alert("Failed to create event.");
@@ -209,9 +224,9 @@ export default function CreateEventForm() {
           <label className="block text-light-200">Event Type</label>
 
           <select
-            value={mode}
+            value={eventMode}
             onChange={(e) => {
-              setMode(e.target.value);
+              setEventMode(e.target.value);
             }}
             className="w-full rounded-md bg-dark-200 border border-dark-200 px-4 py-3 text-sm text-light-200 appearance-none focus:outline-none focus:ring-1 focus:ring-primary"
           >
@@ -333,7 +348,13 @@ export default function CreateEventForm() {
           disabled={loading}
           className="w-full rounded-md bg-primary py-3 text-sm font-semibold text-black hover:bg-primary/90 disabled:opacity-50"
         >
-          {loading ? "Creating Event..." : "Save Event"}
+          {loading
+            ? mode === "create"
+              ? "Creating Event..."
+              : "Updating Event..."
+            : mode === "create"
+              ? "Create Event"
+              : "Update Event"}
         </button>
       </form>
     </div>

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import CreateEventForm from "@/component/CreateEvent";
+import EventForm from "@/component/EventForm";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { redirect } from "next/navigation";
 
@@ -12,7 +12,7 @@ export default async function Page() {
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <CreateEventForm />
+            <EventForm mode="create" />
         </Suspense>
     );
 }

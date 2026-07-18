@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getCurrentUser } from "@/lib/getCurrentUser";
-import { connection } from "next/server";
 import LogoutButton from "./LogoutButton";
 
 const Navbar = async () => {
@@ -19,6 +18,7 @@ const Navbar = async () => {
 
             <ul>
                 <Link href='/'>Home</Link>
+                <Link href='/my-events'>My Events</Link>
                 <Link href='/create-event'>Create Event</Link>
 
                 {!user ? (
