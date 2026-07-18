@@ -44,3 +44,24 @@ export async function login(
 
   return result;
 }
+
+export async function updateProfile(data: {
+    name: string;
+    email: string;
+}) {
+    const response = await fetch("/api/auth/profile", {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.message);
+    }
+
+    return result;
+}

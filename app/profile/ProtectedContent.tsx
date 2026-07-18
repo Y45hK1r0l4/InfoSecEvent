@@ -4,20 +4,19 @@ import ProfileForm from "@/component/ProfileForm";
 import { getCurrentUser } from "@/lib/getCurrentUser";
 
 export default async function ProfilePage() {
-    const user = await getCurrentUser();
+  const user = await getCurrentUser();
 
-    if (!user) {
-        redirect("/login");
-    }
+  if (!user) {
+    redirect("/login");
+  }
 
-    return (
-        <main className="wrapper py-10">
-            <h1 className="mb-8 text-3xl font-bold">
-                Account Settings
-            </h1>
+  return (
+    <main className="flex flex-col items-center wrapper py-16">
+      <h1 className="mb-8 text-3xl font-bold text-center">
+        Account Settings
+      </h1>
 
-            <ProfileForm user={user} />
-        </main>
-    );
+      <ProfileForm user={user} />
+    </main>
+  );
 }
-
