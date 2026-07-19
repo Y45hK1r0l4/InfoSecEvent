@@ -1,87 +1,201 @@
-## Introduction
+# InfoSec Events
 
-InfoSecEvent is a modern event management web application built with Next.js to manage and showcase events seamlessly. It features a dynamic home page displaying upcoming events, robust API routes for CRUD operations, Cloudinary-powered image uploads, detailed event pages with registration and similar event suggestions, and integrated analytics to track user engagement and optimize performance.
+InfoSec Events is a modern event discovery and management platform built with Next.js, React, TypeScript, and MongoDB for the Information Security community. Users can explore cybersecurity conferences, workshops, CTFs, and meetups, while organizers can create, manage, update, and delete their own events through a secure, authenticated dashboard.
 
-## Tech Stack
+---
 
-- Next.js is a powerful React framework for building full-stack web applications. It simplifies development with features like server-side rendering, static site generation, and API routes, enabling developers to focus on building products and shipping quickly.
+## ✨ Features
 
-- Tailwind CSS is a utility-first CSS framework that allows developers to quickly build custom user interfaces with minimal custom CSS. It promotes consistency, responsiveness, and faster styling without leaving the HTML.
+### 🔐 Authentication
+- JWT Authentication
+- Secure HttpOnly Cookies
+- Password Hashing with bcrypt
+- Protected Routes
+- User Authorization
 
-- TypeScript is a superset of JavaScript that adds static typing, providing better tooling, code quality, and error detection for developers. It is ideal for building large-scale applications and enhances the development experience.
+### 📅 Event Management
+- Create Event
+- Edit Event
+- Delete Event
+- View Event Details
+- View Similar Events
+- My Events Dashboard
+- Event Booking
+- Booking Count
 
-- Cloudinary is a cloud-based media management platform that simplifies image and video uploads, storage, optimization, and delivery. It helps developers manage media efficiently and improve website performance.
+### 🖼️ Image Upload
+- Cloudinary Integration
+- Image Preview
+- Automatic Image Upload
 
-- CodeRabbit is a platform that accelerates development workflows by providing AI-powered coding assistance and project scaffolding, helping developers generate code and reduce repetitive tasks.
+### 🏷️ Event Information
+- Title
+- Description
+- Overview
+- Date & Time
+- Venue & Location
+- Online / Offline / Hybrid Mode
+- Tags
+- Agenda
+- Organizer Information
 
-- MongoDB is a flexible, document-oriented NoSQL database that stores data in JSON-like format. It is ideal for modern applications that require scalability, high performance, and schema flexibility.
+### 🔒 Security
+- Ownership-based Authorization
+- Protected API Routes
+- JWT Verification
+- Server-side Validation
+- Mongoose Validation
 
-- Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js. It provides a straightforward schema-based solution to model application data, validate inputs, and manage database interactions efficiently.
+---
 
-- PostHog is an open-source product analytics platform that tracks user interactions, funnels, and feature usage. It enables teams to understand user behavior, optimize features, and make data-driven decisions.
+## 🚀 Tech Stack
 
-- Warp is a modern terminal designed for speed, collaboration, and usability. It enhances developer productivity with features like smart commands, workflows, and session sharing.
+### Frontend
+- Next.js 16 (App Router)
+- React
+- TypeScript
+- Tailwind CSS
 
-## Features
+### Backend
+- Next.js Route Handlers
+- MongoDB
+- Mongoose
 
-👉 Home Page: Displays a dynamic list of events, allowing users to browse upcoming and featured events easily.
+### Authentication
+- JWT
+- bcrypt
 
-👉 API Routes: Create, update, delete, and fetch events from the database with fully functional endpoints.
+### Storage
+- Cloudinary
 
-👉 Cloudinary Integration: Use the Cloudinary SDK to easily upload and manage images in the cloud.
+---
 
-👉 Event Details Page: Shows event information with the ability to register and view a list of similar events.
+## 📂 Project Structure
 
-👉 Next.js 16 Caching: Implements a completely new approach to caching for improved performance and faster page loads.
-
-👉 PostHog Analytics: Tracks user interactions and events, providing detailed insights into app usage and behavior.
-
-And many more, including code architecture and reusability.
-
-## Getting Started
-
-### Clone the repository
-
-```bash
-git clone https://github.com/Y45hK1r0l4/InfoSecEvent.git
 ```
 
-### Navigate to the project
+## ⚙️ Installation
+
+### Clone Repository
 
 ```bash
-cd InfoSecEvent
+git clone https://github.com/yourusername/infosec-events.git
 ```
 
-### Install dependencies
+```bash
+cd infosec-events
+```
+
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Start the development server
+### Create Environment Variables
+
+Create a `.env.local` file.
+
+```env
+MONGODB_URI=
+
+JWT_SECRET=
+
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+CLOUDINARY_URL=
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
 ```
 
-Open:
+Open
 
-```text
+```
 http://localhost:3000
 ```
 
-## Learning Objectives
+---
 
-This project was created to practice and explore:
+## 📸 Screenshots
 
-* Next.js App Router
-* Server Components
-* Client Components
-* Dynamic Routing
-* Layouts
-* TypeScript
-* Component-based architecture
-* Responsive UI development
+### Home Page
+
+<img width="1901" height="980" alt="image" src="https://github.com/user-attachments/assets/0bfe57cd-500a-46bf-ae60-5909b082ce72" />
 
 
+### Event Details
 
+<img width="1902" height="976" alt="image" src="https://github.com/user-attachments/assets/4c3df138-8420-4069-ba53-7d80cc979156" />
+
+<img width="1896" height="972" alt="image" src="https://github.com/user-attachments/assets/7bc0a5ee-3890-4f11-989d-d1d0a0836e39" />
+
+
+### Create Event
+
+<img width="1901" height="980" alt="image" src="https://github.com/user-attachments/assets/9ecc3ab3-79d4-449b-84d1-e293324b86fe" />
+
+
+### My Events
+
+<img width="1917" height="971" alt="image" src="https://github.com/user-attachments/assets/45a2da9a-f9d3-40d7-bc16-52132a7690ae" />
+
+
+### Login
+
+<img width="1910" height="873" alt="image" src="https://github.com/user-attachments/assets/3c05e270-74e7-48af-8524-0f4dafbeb36e" />
+
+
+---
+
+## 📌 API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/api/auth/signup` | Register User |
+| POST | `/api/auth/login` | Login |
+| POST | `/api/auth/logout` | Logout |
+| GET | `/api/auth/profile` | Current User |
+
+---
+
+### Events
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/api/events` | Get All Events |
+| POST | `/api/events` | Create Event |
+| GET | `/api/events/[slug]` | Get Event |
+| PATCH | `/api/events/[slug]` | Update Event |
+| DELETE | `/api/events/[slug]` | Delete Event |
+
+---
+
+### Bookings
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/api/bookings` | Book Event |
+| GET | `/api/bookings/[eventId]` | Booking Count |
+
+---
+
+## 🔐 Authorization Rules
+
+- Only authenticated users can create events.
+- Only the event owner can edit an event.
+- Only the event owner can delete an event.
+- Protected routes require a valid JWT.
+
+---
+
+## Author
+
+**Yash Kirola**
+
+- GitHub: https://github.com/Y45hK1r0l4
