@@ -221,3 +221,56 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
     );
   }
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: RouteParams
+) {
+  try {
+    await connectDB();
+
+    const token = req.cookies.get("token")?.value;
+
+    if (!token) {
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    const payload = verifyToken(token) as TokenPayload;
+
+    const { slug } = await params;
+
+    const event = await Event.findOne({ slug });
+
+    if (!event) {
+      return NextResponse.json(
+        { message: "Event not found" },
+        { status: 404 }
+      );
+    }
+
+    if (event.createdBy.toString() !== payload.userId) {
+      return NextResponse.json(
+        { message: "Forbidden" },
+        { status: 403 }
+      );
+    }
+
+    await Event.deleteOne({ _id: event._id });
+
+    return NextResponse.json(
+      { message: "Event deleted successfully" },
+      { status: 200 }
+    );
+
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json(
+      { message: "Failed to delete event" },
+      { status: 500 }
+    );
+  }
+}
